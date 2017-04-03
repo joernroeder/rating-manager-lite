@@ -8,7 +8,7 @@ Stable tag: 1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-This plugin allows you to rate content by adding custom rating forms. Almost unlimited capabilities for customisation.
+This plugin allows you to rate content by adding custom rating forms. Almost unlimited capabilities for customization.
 
 == Description ==
 
