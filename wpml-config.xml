@@ -1,0 +1,17 @@
+<wpml-config>
+	<admin-texts>
+		<key name="elm_ur_settings">
+			<key name="general_texts">
+				<key name="thankyou_for_voting" />
+				<key name="feedback_about_this_page" />
+				<key name="thankyou_for_feedback" />
+			</key>
+		</key>
+	</admin-texts>
+	<custom-fields>
+		<custom-field action="ignore">_average_page_rating</custom-field>
+	</custom-fields>
+	<custom-types>
+		<custom-type translate="0">page_rating</custom-type>
+	</custom-types>
+</wpml-config>
