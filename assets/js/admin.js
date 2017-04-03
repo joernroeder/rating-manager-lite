@@ -1,5 +1,7 @@
 jQuery( document ).ready(function($) {
 
+	jQuery( '#toplevel_page_rating-manager-lite-admin-panels-settings-general .wp-submenu li:last-child a').css( 'color', 'lightgreen' );
+
 	// Buttons
 	// Reset style HTML template to default
 	jQuery( '#reset-style-html-template' ).on( 'click', function() {

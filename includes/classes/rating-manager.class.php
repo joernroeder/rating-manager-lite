@@ -980,8 +980,8 @@ class Elm_Rating_Manager {
     function install() {
         global $wpdb;
 		
-		if ( get_option( 'elm_ultimate_ratings' ) != 'installed' ) {
-			update_option( 'elm_ultimate_ratings', 'installed' );
+		if ( get_option( 'elm_ultimate_ratings_lite' ) != 'installed' ) {
+			update_option( 'elm_ultimate_ratings_lite', 'installed' );
 			
 			// Add default settings
 			$settings = new Elm_UR_Settings;

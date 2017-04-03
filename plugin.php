@@ -9,6 +9,7 @@
 */
 
 define( 'ELM_UR_VERSION', '1.0' );
+define( 'ELM_UR_PLUGIN_BASENAME', plugin_basename(__FILE__) );
 define( 'ELM_UR_PLUGIN_PATH', dirname( __FILE__ ) );
 define( 'ELM_UR_PLUGIN_ADMIN_PATH', ELM_UR_PLUGIN_PATH . '/admin' );
 define( 'ELM_UR_PLUGIN_INCLUDES_PATH', ELM_UR_PLUGIN_PATH . '/includes' );
@@ -27,6 +28,7 @@ require ELM_UR_PLUGIN_CLASSES_PATH . '/shortcodes.class.php';
 require ELM_UR_PLUGIN_INCLUDES_PATH . '/actions.php';
 require ELM_UR_PLUGIN_INCLUDES_PATH . '/template-functions.php';
 require ELM_UR_PLUGIN_INCLUDES_PATH . '/widgets.php';
+require ELM_UR_PLUGIN_INCLUDES_PATH . '/extra.php';
 
 // bbPress compatibility
 if(class_exists('bbPress')) {

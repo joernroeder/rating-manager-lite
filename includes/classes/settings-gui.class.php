@@ -87,6 +87,7 @@ class Elm_UR_Settings_GUI {
         add_submenu_page( ELM_UR_PLUGIN_PATH . '/admin/panels/settings-general.php', __( 'Statistics', 'elm' ), __( 'Statistics', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/stats.php' );
         add_submenu_page( ELM_UR_PLUGIN_PATH . '/admin/panels/stats-overall.php', __( 'Statistics Overall', 'elm' ), __( 'Statistics Overall', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/stats-overall.php' );
 		add_submenu_page( ELM_UR_PLUGIN_PATH . '/admin/panels/stats-tools.php', __( 'Statistics Tools', 'elm' ), __( 'Statistics Tools', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/stats-tools.php' );
+        add_submenu_page( ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-general.php', __( 'PRO', 'elm' ), __( 'PRO', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/pro.php' );
         
         add_submenu_page( null, __( 'View Feedback', 'elm' ), __( 'View Feedback', 'elm' ), 'manage_options', 'elm-ur-view-feedback', array(
              $this,
