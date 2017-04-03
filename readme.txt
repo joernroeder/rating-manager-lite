@@ -3,8 +3,8 @@ Contributors: Elementous, dominykasgel, darius_fx
 Donate link: https://www.elementous.com
 Tags: rating, star rating, ratings, star, vote, voting, comment rating, bbpress rating, images rating
 Requires at least: 3.0.1
-Tested up to: 4.6.1
-Stable tag: 1.2.2
+Tested up to: 4.7.3
+Stable tag: 1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
