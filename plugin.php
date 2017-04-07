@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: Rating Manager Lite
-  Plugin URI: https://www.elementous.com
+  Plugin URI: https://www.elementous.com/product/premium-wordpress-plugins/rating-manager/
   Description: Get more feedback from your website visitors by adding rating forms for content. This is the first ever WordPress rating plugin that uses SVG images as rating form icons. Almost unlimited capabilities for customisation.
   Author: Elementous
   Author URI: https://www.elementous.com
