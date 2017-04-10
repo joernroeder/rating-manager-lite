@@ -1,6 +1,6 @@
 <wpml-config>
 	<admin-texts>
-		<key name="elm_ur_settings">
+		<key name="elm_rml_settings">
 			<key name="general_texts">
 				<key name="thankyou_for_voting" />
 				<key name="feedback_about_this_page" />

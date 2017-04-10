@@ -10,7 +10,7 @@ class UR_Top_Rated_Posts_Widget extends WP_Widget {
 	 */
 	function __construct() {
 		parent::__construct(
-			'elm_ur_top_rated_posts', // Base ID
+			'elm_rml_top_rated_posts', // Base ID
 			__('Top Rated Posts', 'elm'), // Name
 			array( 'description' => __( 'Display highest rated posts.', 'elm' ), ) // Args
 		);
@@ -104,7 +104,7 @@ class UR_Top_Rated_Posts_Widget extends WP_Widget {
             $html .= '</ul>';
         }
 		
-		echo apply_filters( 'elm_ur_top_rated_posts_widget', $html );
+		echo apply_filters( 'elm_rml_top_rated_posts_widget', $html );
 		
 		echo $args['after_widget'];
 	}
@@ -117,7 +117,7 @@ class UR_Top_Rated_Posts_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database
 	 */
 	public function form( $instance ) {
-		global $elm_ur_ratings;
+		global $elm_rml_ratings;
 		
 		if ( isset( $instance[ 'title' ] ) ) {
 			$title = $instance[ 'title' ];
@@ -136,7 +136,7 @@ class UR_Top_Rated_Posts_Widget extends WP_Widget {
 		<label for="<?php echo $this->get_field_id( 'date' ); ?>"><?php _e( 'Date:' ); ?></label><br />
 		<select id="<?php echo $this->get_field_id( 'date' ); ?>" name="<?php echo $this->get_field_name( 'date' ); ?>" class="widefat">
 		<?php
-		$options = $elm_ur_ratings->stats->get_dates();
+		$options = $elm_rml_ratings->stats->get_dates();
 		
 		foreach( $options as $key => $value ) {
 			$selected = ( $instance[ 'date' ] == $key ) ? 'selected' : '';
@@ -153,7 +153,7 @@ class UR_Top_Rated_Posts_Widget extends WP_Widget {
 		<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post type:' ); ?></label><br />
 		<select id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>" class="widefat">
 		<?php
-		$options = $elm_ur_ratings->get_custom_post_types();
+		$options = $elm_rml_ratings->get_custom_post_types();
 				
 		foreach ( $options as $key => $value ) :
 			$selected = ( $instance[ 'post_type' ] == $key ) ? 'selected' : '';
@@ -213,7 +213,7 @@ class UR_Ratings_Sortby_Dropdown extends WP_Widget {
 	 */
 	function __construct() {
 		parent::__construct(
-			'elm_ur_sortby_dropdown', // Base ID
+			'elm_rml_sortby_dropdown', // Base ID
 			__('Sort by dropdown', 'elm'), // Name
 			array( 'description' => __( 'Sort by dropdown for rated posts.', 'elm' ), ) // Args
 		);
@@ -234,7 +234,7 @@ class UR_Ratings_Sortby_Dropdown extends WP_Widget {
 		if ( ! empty( $title ) )
 			echo $args['before_title'] . $title . $args['after_title'];
 			
-		elm_ratings_sortby_dropdown();
+		elm_rml_ratings_sortby_dropdown();
 	}
 
 	/**
@@ -283,7 +283,7 @@ class UR_Rating_Form extends WP_Widget {
 	 */
 	function __construct() {
 		parent::__construct(
-			'elm_ur_rating_form', // Base ID
+			'elm_rml_rating_form', // Base ID
 			__('Rating', 'elm'), // Name
 			array( 'description' => __( 'Rating form.', 'elm' ), ) // Args
 		);
@@ -305,7 +305,7 @@ class UR_Rating_Form extends WP_Widget {
 			echo $args['before_title'] . $title . $args['after_title'];
 			
 		if ( ! is_home() && ! is_archive() && ! is_search() )	
-			elm_ratings_form();
+			elm_rml_ratings_form();
 	}
 
 	/**

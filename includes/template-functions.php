@@ -3,7 +3,7 @@
 /*
 * Posts sorting by rating DESC and ASC drop down
 */
-function elm_ratings_sortby_dropdown() {
+function elm_rml_ratings_sortby_dropdown() {
 	$current_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         
 	$sort_desc_url = add_query_arg( array(
@@ -16,7 +16,7 @@ function elm_ratings_sortby_dropdown() {
 	$selected_desc = isset( $_GET['ur_sort'] ) && $_GET['ur_sort'] == 'desc' ? 'selected' : '';
 	$selected_asc  = isset( $_GET['ur_sort'] ) && $_GET['ur_sort'] == 'asc' ? 'selected' : '';
 	
-	$html = apply_filters( 'elm_ur_ratings_sortby_dropdow', '
+	$html = apply_filters( 'elm_rml_ratings_sortby_dropdow', '
         <div class="elm-sort-by-widget">
             <select name="elm_sort_by_select" onchange="javascript:location.href = this.value;">
                 <option value="' . esc_url( $sort_desc_url ) . '" ' . $selected_desc . '>' . __( 'Highest rating', 'elm' ) . '</option>
@@ -30,16 +30,16 @@ function elm_ratings_sortby_dropdown() {
 /*
 * Display rating form
 */
-function elm_ratings_form( $post_id = 0, $echo = true ) {
-	global $elm_ur_ratings, $post;
+function elm_rml_ratings_form( $post_id = 0, $echo = true ) {
+	global $elm_rml_ratings, $post;
 	
 	if ( $post_id == 0 )
 		$post_id = $post->ID;
 	
 	if ( $echo == true ) :
-		$elm_ur_ratings->echo_rating_form_html( $post_id );
+		$elm_rml_ratings->echo_rating_form_html( $post_id );
 	else :
-		$elm_ur_ratings->get_rating_form_html( $post_id );
+		$elm_rml_ratings->get_rating_form_html( $post_id );
 	endif;
 }
 
@@ -49,13 +49,13 @@ function elm_ratings_form( $post_id = 0, $echo = true ) {
 * @param integer $avg average
 * @param float $echo
 */
-function elm_readonly_rating_form( $avg, $echo = true ) {
+function elm_rml_readonly_rating_form( $avg, $echo = true ) {
 	$output = '<div class="elm-rating-readonly" data-elm-value="' . $avg . '" data-elm-readonly="true"></div>';
 	
 	if ( $echo == true ) :
-		echo apply_filters( 'elm_readonly_rating_form', $output );
+		echo apply_filters( 'elm_rml_readonly_rating_form', $output );
 	else :
-		return apply_filters( 'elm_readonly_rating_form', $output );
+		return apply_filters( 'elm_rml_readonly_rating_form', $output );
 	endif;
 }
 
@@ -65,10 +65,10 @@ function elm_readonly_rating_form( $avg, $echo = true ) {
 * @param integer $post_id
 * @return integer 
 */
-function elm_ratings_total( $post_id ) {
-	global $elm_ur_ratings;
+function elm_rml_ratings_total( $post_id ) {
+	global $elm_rml_ratings;
 	
-	return $elm_ur_ratings->stats->total_ratings( $post_id );
+	return $elm_rml_ratings->stats->total_ratings( $post_id );
 }
 
 /*
@@ -78,10 +78,10 @@ function elm_ratings_total( $post_id ) {
 * @param string $date today|3_days|7_days|14_days|1_month|3_months|6_months|1_year
 * @return integer 
 */
-function elm_ratings_get_rated_posts( $post_type = 'all', $date = '' ) {
-	global $elm_ur_ratings;
+function elm_rml_ratings_get_rated_posts( $post_type = 'all', $date = '' ) {
+	global $elm_rml_ratings;
 	
-	return $elm_ur_ratings->stats->get_all_rated_posts( $post_type, $date );
+	return $elm_rml_ratings->stats->get_all_rated_posts( $post_type, $date );
 }
 
 /*
@@ -90,8 +90,8 @@ function elm_ratings_get_rated_posts( $post_type = 'all', $date = '' ) {
 * @param integer $post_id
 * @return integer 
 */
-function elm_ratings_get_average( $post_id ) {
-	global $elm_ur_ratings;
+function elm_rml_ratings_get_average( $post_id ) {
+	global $elm_rml_ratings;
 	
-	return $elm_ur_ratings->calculate_average( $post_id );
+	return $elm_rml_ratings->calculate_average( $post_id );
 }

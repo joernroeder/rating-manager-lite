@@ -19,4 +19,4 @@ $wpdb->hide_errors();
 		
 // Delete options
 delete_option( 'elm_ultimate_ratings' );
-delete_option( 'elm_ur_settings' );
+delete_option( 'elm_rml_settings' );

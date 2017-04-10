@@ -7,14 +7,14 @@
 if ( !defined('ABSPATH') )
 	exit;
  
-global $elm_ur_ratings;
-$settings = $elm_ur_ratings->get_settings->get_settings();
+global $elm_rml_ratings;
+$settings = $elm_rml_ratings->get_settings->get_settings();
 ?>
 
 <div class="wrap rating-manager">
-	<?php $elm_ur_ratings->get_settings_gui->messages_html(); ?>
+	<?php $elm_rml_ratings->get_settings_gui->messages_html(); ?>
 		
-	<?php $elm_ur_ratings->get_settings_gui->tabs_html(); ?>
+	<?php $elm_rml_ratings->get_settings_gui->tabs_html(); ?>
 
     <h3><?php _e('Messages', 'elm'); ?></h3>
 
@@ -46,7 +46,7 @@ $settings = $elm_ur_ratings->get_settings->get_settings();
             </tr>
         </table>
 
-		<?php wp_nonce_field( 'elm_ur_settings_texts_page_action', 'elm_ur_settings_texts_page_nonce' ); ?>
+		<?php wp_nonce_field( 'elm_rml_settings_texts_page_action', 'elm_rml_settings_texts_page_nonce' ); ?>
 		
         <p class="submit">
             <input type="submit" name="elm_save_ur_settings_texts" id="submit" class="button button-primary" value="<?php _e('Save settings', 'elm'); ?>" />

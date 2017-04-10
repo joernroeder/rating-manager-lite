@@ -7,8 +7,8 @@
 if ( !defined('ABSPATH') )
     exit;
 
-global $elm_ur_ratings;
-$settings = $elm_ur_ratings->get_settings->get_settings();
+global $elm_rml_ratings;
+$settings = $elm_rml_ratings->get_settings->get_settings();
 ?>
 
 <div class="wrap rating-manager">

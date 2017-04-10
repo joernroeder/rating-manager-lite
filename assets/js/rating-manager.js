@@ -76,7 +76,7 @@ jQuery(document).ready(function($) {
 });
 
 // Process rating form
-function elm_ur_process(svg_source, options, nonce) {
+function elm_rml_process(svg_source, options, nonce) {
 	options.svg_source = svg_source;
 		
 	jQuery('.elm-rating').UR(options).one('ultimateratings.set', function(e, data) {
@@ -137,7 +137,7 @@ function elm_ultimate_ratings( file, options, ur_nonce ) {
 }
 
 // Display read only ratings
-function elm_ur_display( svg_source, options ) {
+function elm_rml_display( svg_source, options ) {
 	options.svg_source = svg_source;
 	
 	jQuery('.elm-rating-readonly').each(function() {
@@ -148,8 +148,8 @@ function elm_ur_display( svg_source, options ) {
 // AJAX callback after loading SVG file
 // Setup rating form
 function elm_ultimate_ratings_callback( svg_source, options, ur_nonce ) {
-	elm_ur_display( svg_source, options );
-	elm_ur_process( svg_source, options, ur_nonce ); 
+	elm_rml_display( svg_source, options );
+	elm_rml_process( svg_source, options, ur_nonce ); 
 }
 
 function elm_isValidEmailAddress(emailAddress) {

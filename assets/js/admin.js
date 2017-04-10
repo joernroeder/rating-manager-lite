@@ -90,7 +90,7 @@ jQuery( document ).ready(function($) {
 function elm_change_ur_svg_icon( svg_file_name ) {
 	var file = svg_folder_url + svg_file_name + '.svg';
 		
-	var svg_source = elm_ur_admin_load_svg( file );
+	var svg_source = elm_rml_admin_load_svg( file );
 		
 	jQuery('#rating-svg-icon-preview').html( svg_source );
 	jQuery('#rating-svg-icon-preview').find('svg').attr('width', '24px');
@@ -99,7 +99,7 @@ function elm_change_ur_svg_icon( svg_file_name ) {
 
 // send a request to a server
 // load SVG file source
-function elm_ur_admin_load_svg(file) {
+function elm_rml_admin_load_svg(file) {
 	// Check file type?
 	// Check host?
 

@@ -7,14 +7,14 @@
 if ( !defined('ABSPATH') )
 	exit;
  
-global $elm_ur_ratings;
-$settings = $elm_ur_ratings->get_settings->get_settings();
+global $elm_rml_ratings;
+$settings = $elm_rml_ratings->get_settings->get_settings();
 ?>
 
 <div class="wrap rating-manager">
-	<?php $elm_ur_ratings->get_settings_gui->messages_html(); ?>
+	<?php $elm_rml_ratings->get_settings_gui->messages_html(); ?>
 		
-	<?php $elm_ur_ratings->get_settings_gui->tabs_html(); ?>
+	<?php $elm_rml_ratings->get_settings_gui->tabs_html(); ?>
 
     <h3><?php _e('Style Settings', 'elm'); ?></h3>
 
@@ -28,7 +28,7 @@ $settings = $elm_ur_ratings->get_settings->get_settings();
 					<fieldset><legend class="screen-reader-text"><span><?php _e('SVG', 'elm'); ?></span></legend>
 					<select name="rating_image" id="rating-svg-icon">
 						<?php
-						$image_size_list = elm_ur_icon_list();
+						$image_size_list = elm_rml_icon_list();
 						foreach( $image_size_list as $k => $value ) {
 							$selected = selected( $settings['style']['rating_image'], $k, false );
 					
@@ -50,7 +50,7 @@ $settings = $elm_ur_ratings->get_settings->get_settings();
                 <td>
 				<select name="rating_image_size" id="rating_image_size">
 					<?php
-					$image_size_list = elm_ur_image_size();
+					$image_size_list = elm_rml_image_size();
 					foreach($image_size_list as $k => $value ) {
 						$selected = selected( $settings['style']['rating_image_size'], $k, false );
 					
@@ -117,7 +117,7 @@ $settings = $elm_ur_ratings->get_settings->get_settings();
             </tr>
         </table>
 
-		<?php wp_nonce_field( 'elm_ur_settings_style_page_action', 'elm_ur_settings_style_page_nonce' ); ?>
+		<?php wp_nonce_field( 'elm_rml_settings_style_page_action', 'elm_rml_settings_style_page_nonce' ); ?>
 		
         <p class="submit">
             <input type="submit" name="elm_save_ur_settings_style" id="submit" class="button button-primary" value="<?php _e('Save settings', 'elm'); ?>" />

@@ -7,11 +7,11 @@
 if ( !defined('ABSPATH') )
 	exit;
 	
-global $elm_ur_ratings;
+global $elm_rml_ratings;
 
 $feedback_id = ( isset($_GET['feedback_id'] ) ) ? intval ($_GET['feedback_id'] ) : 0;
 
-$feedback_posts = $elm_ur_ratings->stats->get_feedback( $feedback_id );
+$feedback_posts = $elm_rml_ratings->stats->get_feedback( $feedback_id );
 
 
 if( $feedback_id == 0 || !$feedback_posts )
@@ -24,7 +24,7 @@ if( $feedback_id == 0 || !$feedback_posts )
 	
 	<h2><?php _e( 'Rating Manager', 'elm' ); ?></h2>
 	
-<?php $elm_ur_ratings->get_settings_gui->stats_tabs_html(); ?>
+<?php $elm_rml_ratings->get_settings_gui->stats_tabs_html(); ?>
 
 <br />
 

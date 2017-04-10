@@ -1,8 +1,8 @@
 <?php
 
-if ( ! class_exists( 'Elm_UR_Settings_GUI' ) ) :
+if ( ! class_exists( 'ELM_RML_Settings_GUI' ) ) :
 
-class Elm_UR_Settings_GUI {
+class ELM_RML_Settings_GUI {
     
     function __construct() {
         add_action( 'admin_menu', array( $this, 'menu' ) );
@@ -17,10 +17,10 @@ class Elm_UR_Settings_GUI {
 		global $pagenow;
 		
 		$screen = get_current_screen();
-		$settings_page = ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-style';
+		$settings_page = ELM_RML_PLUGIN_FOLDER . '/admin/panels/settings-style';
 		
 		if ( $screen->base == $settings_page && $pagenow == 'admin.php' ) {
-			$svg_folder_url = ELM_UR_PLUGIN_URL . '/svg/';
+			$svg_folder_url = ELM_RML_PLUGIN_URL . '/svg/';
 			
 			$output = "<script type=\"text/javascript\">";
 			$output .= "var svg_folder_url = '". $svg_folder_url . "';
@@ -48,9 +48,9 @@ class Elm_UR_Settings_GUI {
         $texts_active    = ( basename( $_GET['page'] ) == 'settings-messages.php' ) ? 'nav-tab-active' : '';
         
         $html = '<h2 class="nav-tab-wrapper" id="elm-settings-tabs">' . "\r\n";
-        $html .= '<a class="nav-tab ' . $general_active . '" id="elm-settings-general-tab" href="' . admin_url( 'admin.php?page=' . ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-general.php' ) . '">' . __( 'General', 'elm' ) . '</a>' . "\r\n";
-        $html .= '<a class="nav-tab ' . $style_active . '" id="elm-settings-style-tab" href="' . admin_url( 'admin.php?page=' . ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-style.php' ) . '">' . __( 'Style', 'elm' ) . '</a>' . "\r\n";
-        $html .= '<a class="nav-tab ' . $texts_active . '" id="elm-settings-messages-tab" href="' . admin_url( 'admin.php?page=' . ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-messages.php' ) . '">' . __( 'Messages', 'elm' ) . '</a>' . "\r\n";
+        $html .= '<a class="nav-tab ' . $general_active . '" id="elm-settings-general-tab" href="' . admin_url( 'admin.php?page=' . ELM_RML_PLUGIN_FOLDER . '/admin/panels/settings-general.php' ) . '">' . __( 'General', 'elm' ) . '</a>' . "\r\n";
+        $html .= '<a class="nav-tab ' . $style_active . '" id="elm-settings-style-tab" href="' . admin_url( 'admin.php?page=' . ELM_RML_PLUGIN_FOLDER . '/admin/panels/settings-style.php' ) . '">' . __( 'Style', 'elm' ) . '</a>' . "\r\n";
+        $html .= '<a class="nav-tab ' . $texts_active . '" id="elm-settings-messages-tab" href="' . admin_url( 'admin.php?page=' . ELM_RML_PLUGIN_FOLDER . '/admin/panels/settings-messages.php' ) . '">' . __( 'Messages', 'elm' ) . '</a>' . "\r\n";
         $html .= '</h2>' . "\r\n";
         
         echo $html;
@@ -65,9 +65,9 @@ class Elm_UR_Settings_GUI {
         $all_ratings_active = ( basename( $_GET['page'] ) == 'stats.php' ) ? 'nav-tab-active' : '';
         
         $html = '<h2 class="nav-tab-wrapper" id="elm-settings-tabs">' . "\r\n";
-        $html .= '<a class="nav-tab ' . $all_ratings_active . '" id="elm-all-ratings-tab" href="' . admin_url( 'admin.php?page=' . ELM_UR_PLUGIN_FOLDER . '/admin/panels/stats.php' ) . '">' . __( 'All ratings', 'elm' ) . '</a>' . "\r\n";
-        $html .= '<a class="nav-tab ' . $overall_active . '" id="elm-overall-tab" href="' . admin_url( 'admin.php?page=' . ELM_UR_PLUGIN_FOLDER . '/admin/panels/stats-overall.php' ) . '">' . __( 'Overall statistics', 'elm' ) . '</a>' . "\r\n";
-		$html .= '<a class="nav-tab ' . $tools_active . '" id="elm-tools-tab" href="' . admin_url( 'admin.php?page=' . ELM_UR_PLUGIN_FOLDER . '/admin/panels/stats-tools.php' ) . '">' . __( 'Tools', 'elm' ) . '</a>' . "\r\n";
+        $html .= '<a class="nav-tab ' . $all_ratings_active . '" id="elm-all-ratings-tab" href="' . admin_url( 'admin.php?page=' . ELM_RML_PLUGIN_FOLDER . '/admin/panels/stats.php' ) . '">' . __( 'All ratings', 'elm' ) . '</a>' . "\r\n";
+        $html .= '<a class="nav-tab ' . $overall_active . '" id="elm-overall-tab" href="' . admin_url( 'admin.php?page=' . ELM_RML_PLUGIN_FOLDER . '/admin/panels/stats-overall.php' ) . '">' . __( 'Overall statistics', 'elm' ) . '</a>' . "\r\n";
+		$html .= '<a class="nav-tab ' . $tools_active . '" id="elm-tools-tab" href="' . admin_url( 'admin.php?page=' . ELM_RML_PLUGIN_FOLDER . '/admin/panels/stats-tools.php' ) . '">' . __( 'Tools', 'elm' ) . '</a>' . "\r\n";
         $html .= '</h2>' . "\r\n";
         
         echo $html;
@@ -79,15 +79,15 @@ class Elm_UR_Settings_GUI {
     function menu() {
 		global $submenu;
 	
-        add_menu_page( __( 'General', 'elm' ), __( 'Rating Manager', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/settings-general.php', '', ELM_UR_PLUGIN_URL . '/assets/images/plugin-icon.png' );
-        add_submenu_page( null, __( 'Style', 'elm' ), __( 'Style', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/settings-style.php' );
-        add_submenu_page( null, __( 'Messages', 'elm' ), __( 'Texts', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/settings-messages.php' );
+        add_menu_page( __( 'General', 'elm' ), __( 'Rating Manager', 'elm' ), 'manage_options', ELM_RML_PLUGIN_PATH . '/admin/panels/settings-general.php', '', ELM_RML_PLUGIN_URL . '/assets/images/plugin-icon.png' );
+        add_submenu_page( null, __( 'Style', 'elm' ), __( 'Style', 'elm' ), 'manage_options', ELM_RML_PLUGIN_PATH . '/admin/panels/settings-style.php' );
+        add_submenu_page( null, __( 'Messages', 'elm' ), __( 'Texts', 'elm' ), 'manage_options', ELM_RML_PLUGIN_PATH . '/admin/panels/settings-messages.php' );
         
 		// Statistics
-        add_submenu_page( ELM_UR_PLUGIN_PATH . '/admin/panels/settings-general.php', __( 'Statistics', 'elm' ), __( 'Statistics', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/stats.php' );
-        add_submenu_page( ELM_UR_PLUGIN_PATH . '/admin/panels/stats-overall.php', __( 'Statistics Overall', 'elm' ), __( 'Statistics Overall', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/stats-overall.php' );
-		add_submenu_page( ELM_UR_PLUGIN_PATH . '/admin/panels/stats-tools.php', __( 'Statistics Tools', 'elm' ), __( 'Statistics Tools', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/stats-tools.php' );
-        add_submenu_page( ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-general.php', __( 'PRO', 'elm' ), __( 'PRO', 'elm' ), 'manage_options', ELM_UR_PLUGIN_PATH . '/admin/panels/pro.php' );
+        add_submenu_page( ELM_RML_PLUGIN_PATH . '/admin/panels/settings-general.php', __( 'Statistics', 'elm' ), __( 'Statistics', 'elm' ), 'manage_options', ELM_RML_PLUGIN_PATH . '/admin/panels/stats.php' );
+        add_submenu_page( ELM_RML_PLUGIN_PATH . '/admin/panels/stats-overall.php', __( 'Statistics Overall', 'elm' ), __( 'Statistics Overall', 'elm' ), 'manage_options', ELM_RML_PLUGIN_PATH . '/admin/panels/stats-overall.php' );
+		add_submenu_page( ELM_RML_PLUGIN_PATH . '/admin/panels/stats-tools.php', __( 'Statistics Tools', 'elm' ), __( 'Statistics Tools', 'elm' ), 'manage_options', ELM_RML_PLUGIN_PATH . '/admin/panels/stats-tools.php' );
+        add_submenu_page( ELM_RML_PLUGIN_FOLDER . '/admin/panels/settings-general.php', __( 'PRO', 'elm' ), __( 'PRO', 'elm' ), 'manage_options', ELM_RML_PLUGIN_PATH . '/admin/panels/pro.php' );
         
         add_submenu_page( null, __( 'View Feedback', 'elm' ), __( 'View Feedback', 'elm' ), 'manage_options', 'elm-ur-view-feedback', array(
              $this,
@@ -95,7 +95,7 @@ class Elm_UR_Settings_GUI {
         ) );
 		
 		// Change Rating Manager submenu name to Settings
-		$settings_general = ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-general.php';
+		$settings_general = ELM_RML_PLUGIN_FOLDER . '/admin/panels/settings-general.php';
 		$submenu[$settings_general][0][0] = __('Settings', 'elm');
     }
     
@@ -103,29 +103,29 @@ class Elm_UR_Settings_GUI {
      * Stats view feedback page
      */
     function stats_view_feedback_page() {
-        require( ELM_UR_PLUGIN_ADMIN_PATH . '/panels/stats-view-feedback.php' );
+        require( ELM_RML_PLUGIN_ADMIN_PATH . '/panels/stats-view-feedback.php' );
     }
     
 	/**
      * Enqueue admin CSS and scripts
      */
     function enqueue_scripts( $hook ) {
-		wp_enqueue_script( 'elm-ur-admin', ELM_UR_PLUGIN_URL . '/assets/js/admin.js' );
+		wp_enqueue_script( 'elm-ur-admin', ELM_RML_PLUGIN_URL . '/assets/js/admin.js' );
 	
-        if ( $hook != ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-general.php' 
-            && $hook != ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-style.php' 
-            && $hook != ELM_UR_PLUGIN_FOLDER . '/admin/panels/settings-messages.php'
-            && $hook != ELM_UR_PLUGIN_FOLDER . '/admin/panels/stats.php' 
-            && $hook != ELM_UR_PLUGIN_FOLDER . '/admin/panels/stats-overall.php' 
-            && $hook != ELM_UR_PLUGIN_FOLDER . '/admin/panels/stats-tools.php' )
+        if ( $hook != ELM_RML_PLUGIN_FOLDER . '/admin/panels/settings-general.php' 
+            && $hook != ELM_RML_PLUGIN_FOLDER . '/admin/panels/settings-style.php' 
+            && $hook != ELM_RML_PLUGIN_FOLDER . '/admin/panels/settings-messages.php'
+            && $hook != ELM_RML_PLUGIN_FOLDER . '/admin/panels/stats.php' 
+            && $hook != ELM_RML_PLUGIN_FOLDER . '/admin/panels/stats-overall.php' 
+            && $hook != ELM_RML_PLUGIN_FOLDER . '/admin/panels/stats-tools.php' )
             return;
         
-        wp_enqueue_script( 'elm-ur-colorpicker', ELM_UR_PLUGIN_URL . '/assets/js/colorpicker.min.js' );
+        wp_enqueue_script( 'elm-ur-colorpicker', ELM_RML_PLUGIN_URL . '/assets/js/colorpicker.min.js' );
         
-        wp_register_style( 'elm-ur-admin', ELM_UR_PLUGIN_URL . '/assets/css/admin.min.css' );
+        wp_register_style( 'elm-ur-admin', ELM_RML_PLUGIN_URL . '/assets/css/admin.min.css' );
         wp_enqueue_style( 'elm-ur-admin' );
         
-        wp_register_style( 'elm-ur-colorpicker', ELM_UR_PLUGIN_URL . '/assets/css/colorpicker.min.css' );
+        wp_register_style( 'elm-ur-colorpicker', ELM_RML_PLUGIN_URL . '/assets/css/colorpicker.min.css' );
         wp_enqueue_style( 'elm-ur-colorpicker' );
     }
     
@@ -133,7 +133,7 @@ class Elm_UR_Settings_GUI {
      * Get messages for admin pages
      */
 	function get_messages() {
-        $settings = new Elm_UR_Settings;
+        $settings = new ELM_RML_Settings;
         
         if ( !empty( $settings->message ) ) {
             $messages = '';

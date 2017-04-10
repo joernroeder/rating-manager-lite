@@ -7,17 +7,17 @@
 if ( !defined('ABSPATH') )
 	exit;
  
-global $elm_ur_ratings;
+global $elm_rml_ratings;
 	
-$stats = $elm_ur_ratings->stats->get_stats();
+$stats = $elm_rml_ratings->stats->get_stats();
 
-$post_types = $elm_ur_ratings->stats->get_post_types_db();
+$post_types = $elm_rml_ratings->stats->get_post_types_db();
 
-$sort_types = $elm_ur_ratings->stats->get_sort_types();
+$sort_types = $elm_rml_ratings->stats->get_sort_types();
 
-$dates = $elm_ur_ratings->stats->get_dates();
+$dates = $elm_rml_ratings->stats->get_dates();
 
-$items = $elm_ur_ratings->stats->stats_content($stats['items'], $stats['limit']); 
+$items = $elm_rml_ratings->stats->stats_content($stats['items'], $stats['limit']); 
 ?>
 
 <div class="wrap">
@@ -27,7 +27,7 @@ $items = $elm_ur_ratings->stats->stats_content($stats['items'], $stats['limit'])
 	
 	<h2><?php _e('Rating Manager', 'elm'); ?></h2>
 
-<?php $elm_ur_ratings->get_settings_gui->stats_tabs_html(); ?>
+<?php $elm_rml_ratings->get_settings_gui->stats_tabs_html(); ?>
 
 <?php
 	if ( !empty( $items) ) :
@@ -83,7 +83,7 @@ $items = $elm_ur_ratings->stats->stats_content($stats['items'], $stats['limit'])
 		</div>
 		
 		<div class="tablenav-pages">
-			<?php $elm_ur_ratings->stats->stats_pagination($stats['qty_pages'], $stats['qty_items']); ?>
+			<?php $elm_rml_ratings->stats->stats_pagination($stats['qty_pages'], $stats['qty_items']); ?>
 		</div>
 	</div>
 	<?php
@@ -152,10 +152,10 @@ $items = $elm_ur_ratings->stats->stats_content($stats['items'], $stats['limit'])
 							<?php echo $item['average_rating']; ?>
 					</td>
 					<td>
-						<?php echo $elm_ur_ratings->get_rated_by_users_num( $item['id'] ); ?>
+						<?php echo $elm_rml_ratings->get_rated_by_users_num( $item['id'] ); ?>
 					</td>
 					<td>
-						<?php echo $elm_ur_ratings->stats->get_view_feedback_url( $item['id'] ); ?>
+						<?php echo $elm_rml_ratings->stats->get_view_feedback_url( $item['id'] ); ?>
 					</td>	
 				</tr>
 				<?php

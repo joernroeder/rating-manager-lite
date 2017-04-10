@@ -1,8 +1,8 @@
 <?php
 
-if ( ! class_exists( 'Elm_UR_Stats' ) ) :
+if ( ! class_exists( 'ELM_RML_Stats' ) ) :
 
-class Elm_UR_Stats {
+class ELM_RML_Stats {
     
     function __construct() {
 		add_action( 'wp_ajax_elm_reset_post_type_stats', array( $this, 'reset_content_stats' ) );
@@ -30,7 +30,7 @@ class Elm_UR_Stats {
      * AJAX reset post type stats data callback
      */
 	function reset_content_stats() {
-		check_ajax_referer( 'elm_ur_reset_post_type_stats_action', 'nonce' );
+		check_ajax_referer( 'elm_rml_reset_post_type_stats_action', 'nonce' );
 		
 		$this->reset_content_stats_query();
 		
@@ -50,7 +50,7 @@ class Elm_UR_Stats {
      * Reset ratings stats for post AJAX callback
      */
     function reset_post_stats() {
-		check_ajax_referer( 'elm_ur_reset_ratings_action', 'nonce' );
+		check_ajax_referer( 'elm_rml_reset_ratings_action', 'nonce' );
 		
 		$post_id = intval( $_POST['post_id'] );
 		
@@ -87,7 +87,7 @@ class Elm_UR_Stats {
 		
 		$_key .= '_';
 		
-		update_option( 'elm_ur_cookie_prefix', $_key );
+		update_option( 'elm_rml_cookie_prefix', $_key );
 	}
 	
 	/**
@@ -105,7 +105,7 @@ class Elm_UR_Stats {
      * Get cookie value prefix
      */
 	function get_cookie_value_prefix() {
-		$prefix = get_option( 'elm_ur_cookie_prefix' );
+		$prefix = get_option( 'elm_rml_cookie_prefix' );
 		
 		return $prefix;
 	}
@@ -310,7 +310,7 @@ class Elm_UR_Stats {
      * Get stats URL
      */
     function get_stats_url() {
-        return admin_url( 'admin.php?page=' . ELM_UR_PLUGIN_PATH . '/admin/panels/stats.php' );
+        return admin_url( 'admin.php?page=' . ELM_RML_PLUGIN_PATH . '/admin/panels/stats.php' );
     }
     
     /*

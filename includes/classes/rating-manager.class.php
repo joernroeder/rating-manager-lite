@@ -10,9 +10,9 @@ class Elm_Rating_Manager {
     
     function init() {
         // Load class instances
-        $this->get_settings     = new Elm_UR_Settings;
-        $this->get_settings_gui = new Elm_UR_Settings_GUI;
-        $this->stats            = new Elm_UR_Stats;
+        $this->get_settings     = new ELM_RML_Settings;
+        $this->get_settings_gui = new ELM_RML_Settings_GUI;
+        $this->stats            = new ELM_RML_Stats;
         
         $this->create_post_type(); // Creates post type
         
@@ -36,13 +36,13 @@ class Elm_Rating_Manager {
             add_action( $own_hook_name, array( $this, 'echo_rating_form_html' ) );
         }
 		
-		do_action( 'elm_ur_init' );
+		do_action( 'elm_rml_init' );
     }
 	/*
      * Load plugin textdomain
      */
 	function load_textdomain() {
-		load_plugin_textdomain( 'elm', false, ELM_UR_PLUGIN_PATH . '/languages' ); 
+		load_plugin_textdomain( 'elm', false, ELM_RML_PLUGIN_PATH . '/languages' ); 
 	}
     
     /*
@@ -63,7 +63,7 @@ class Elm_Rating_Manager {
 		if( !wp_verify_nonce( $nonce, 'feedback_form-' . $post_id ) )
 			die( 'Invalid nonce' );
 			
-		do_action( 'elm_ur_feedback_ajax_callback', $message, $name, $email, $post_id, $rating );
+		do_action( 'elm_rml_feedback_ajax_callback', $message, $name, $email, $post_id, $rating );
         
         $this->add_feedback( $post_id, $rating, $message, $name, $email );
         
@@ -91,9 +91,9 @@ class Elm_Rating_Manager {
      * AJAX rate callback
      */
     function process_rating_callback() {
-		check_ajax_referer( 'elm_ur_process_rating_action', 'nonce' );
+		check_ajax_referer( 'elm_rml_process_rating_action', 'nonce' );
 		
-		do_action( 'elm_ur_add_rating_ajax_callback', $_POST );
+		do_action( 'elm_rml_add_rating_ajax_callback', $_POST );
 		
 		// Rating value
         $value = intval( $_POST['value'] );
@@ -155,7 +155,7 @@ class Elm_Rating_Manager {
             ) );
         }
 		
-		do_action( 'elm_ur_add_feedback', $post_id, $rating, $message, $name, $email );
+		do_action( 'elm_rml_add_feedback', $post_id, $rating, $message, $name, $email );
     }
     
     /**
@@ -182,7 +182,7 @@ class Elm_Rating_Manager {
         // Update average
         $this->update_average_page_rating( $post_id );
 		
-		do_action( 'elm_ur_add_rating', $post_type, $rating, $post_id );
+		do_action( 'elm_rml_add_rating', $post_type, $rating, $post_id );
         
         return $rating;
     }
@@ -518,7 +518,7 @@ class Elm_Rating_Manager {
 		$output .= '<br />';
 		
 		$output .= '<input type="hidden" name="reset_ratings_post_id" id="reset-ratings-post-id" value="'. $post->ID .'" />';
-		$output .= '<input type="hidden" name="reset_ratings_nonce" id="reset-ratings-nonce" value="'. wp_create_nonce( 'elm_ur_reset_ratings_action' ) .'" />';
+		$output .= '<input type="hidden" name="reset_ratings_nonce" id="reset-ratings-nonce" value="'. wp_create_nonce( 'elm_rml_reset_ratings_action' ) .'" />';
 
 		$output .= '<a href="javascript:void(0)" id="reset-post-stats" class="button">'. __('Reset stats', 'elm') .'</a> <span class="reset-post-stats-message"></span>';
 		
@@ -535,7 +535,7 @@ class Elm_Rating_Manager {
         
         $update = update_post_meta( $post_id, '_average_page_rating', $calculate_average );
 		
-		do_action( 'elm_ur_update_average_rating', $calculate_average, $post_id );
+		do_action( 'elm_rml_update_average_rating', $calculate_average, $post_id );
         
         return $update;
     }
@@ -598,7 +598,7 @@ class Elm_Rating_Manager {
      */
     function average_calculate_func( $post_id, $array ) {
 	
-		$max_ratings = get_option( 'elm_ur_settings' );
+		$max_ratings = get_option( 'elm_rml_settings' );
 		$max_ratings = $max_ratings['style']['max_ratings'];
 
         $total = 0;
@@ -609,7 +609,7 @@ class Elm_Rating_Manager {
             $total = $total + $value;
         }
 
-		$average = apply_filters( 'elm_ur_average_calculate_func', ( $total / $count ), $max_ratings, $array, $count, $total );
+		$average = apply_filters( 'elm_rml_average_calculate_func', ( $total / $count ), $max_ratings, $array, $count, $total );
         
         return round( $average );
     }
@@ -627,7 +627,7 @@ class Elm_Rating_Manager {
 		
 		$result = $wpdb->get_var( "SELECT COUNT(id) FROM {$wpdb->prefix}elm_ratings WHERE post_id = {$post_id} AND type = '{$post_type}'" );
 	
-		return apply_filters( 'elm_ur_rated_users_number', $result, $post_id, $post_type );
+		return apply_filters( 'elm_rml_rated_users_number', $result, $post_id, $post_type );
 	}
     
     /*
@@ -637,9 +637,9 @@ class Elm_Rating_Manager {
 		global $post;
 	
 		$svg_icon_name = $this->get_settings->get_setting( 'style', 'rating_image' );
-		$svg_icon = ELM_UR_PLUGIN_URL . '/svg/' . $svg_icon_name . '.svg';
+		$svg_icon = ELM_RML_PLUGIN_URL . '/svg/' . $svg_icon_name . '.svg';
 		
-		if ( ! file_exists( ELM_UR_PLUGIN_SVG_PATH . '/' . $svg_icon_name . '.svg' ) )
+		if ( ! file_exists( ELM_RML_PLUGIN_SVG_PATH . '/' . $svg_icon_name . '.svg' ) )
 			return;
 	
         $max_ratings = $this->get_settings->get_setting( 'style', 'max_ratings' );
@@ -647,16 +647,16 @@ class Elm_Rating_Manager {
         $normal_fill = $this->get_settings->get_setting( 'style', 'color', 'normal_fill' );
         $rated_fill  = $this->get_settings->get_setting( 'style', 'color', 'rated_fill' );
         
-		$ratings_nonce = wp_create_nonce( 'elm_ur_process_rating_action' );
+		$ratings_nonce = wp_create_nonce( 'elm_rml_process_rating_action' );
         
         $output = "<script type=\"text/javascript\">
 			var options = { numIcons: " . $max_ratings . ", maxValue: " . $max_ratings . ", normalFill: '" . $normal_fill . "', ratedFill: '" . $rated_fill . "', svgWidth: '" . $image_size . "' }; var ur_nonce = '". $ratings_nonce ."';
 			elm_ultimate_ratings( '" . $svg_icon . "', options, ur_nonce );
         </script>";
 		
-		do_action( 'elm_ur_rating_js' );
+		do_action( 'elm_rml_rating_js' );
         
-        echo apply_filters( 'elm_ur_rating_js', $output );
+        echo apply_filters( 'elm_rml_rating_js', $output );
     }
     
     /**
@@ -674,7 +674,7 @@ class Elm_Rating_Manager {
 		
 		$_template = $this->get_settings->get_setting( 'style', 'template' );
 		
-		do_action( 'elm_ur_below_html_template', $avg, $feedback_form, $use_schema, $max_ratings, $thankyou_msg );
+		do_action( 'elm_rml_below_html_template', $avg, $feedback_form, $use_schema, $max_ratings, $thankyou_msg );
 		
 		$_template = str_replace( '%THANK_YOU_MESSAGE%', '<div class="elm-thankyou-msg"></div>', $_template );
 		
@@ -718,9 +718,9 @@ class Elm_Rating_Manager {
         if ( $feedback_form )
             $_template .= $this->feedback_form();
 			
-		do_action( 'elm_ur_after_html_template', $_template, $avg, $feedback_form, $use_schema, $max_ratings, $thankyou_msg );
+		do_action( 'elm_rml_after_html_template', $_template, $avg, $feedback_form, $use_schema, $max_ratings, $thankyou_msg );
         
-        return apply_filters( 'elm_ur_html_template', $_template );
+        return apply_filters( 'elm_rml_html_template', $_template );
     }
     
     /*
@@ -733,7 +733,7 @@ class Elm_Rating_Manager {
 		$nonce = wp_create_nonce( 'feedback_form-' . $post->ID );
         
 		$output = '<div class="elm-feedback">';
-        $output .= '<a href="javascript:void(0)" class="elm-leave-your-feedback">' . apply_filters( 'elm_ur_leave_your_feedback', __( 'Leave your feedback', 'elm' ) ) . '</a>';
+        $output .= '<a href="javascript:void(0)" class="elm-leave-your-feedback">' . apply_filters( 'elm_rml_leave_your_feedback', __( 'Leave your feedback', 'elm' ) ) . '</a>';
         
         $output .= '<div class="feedback-wrapper">';
         
@@ -761,7 +761,7 @@ class Elm_Rating_Manager {
         $output .= '</div>';
 		$output .= '</div>';
         
-        return apply_filters( 'elm_ur_feedback_form_html', $output );
+        return apply_filters( 'elm_rml_feedback_form_html', $output );
     }
     
     /**
@@ -798,15 +798,15 @@ class Elm_Rating_Manager {
     function enqueue_scripts() {
 		global $post;
 		
-		$ratings_js_url = apply_filters( 'elm_ur_ratings_js_url', ELM_UR_PLUGIN_URL . '/assets/js/ratings.js' );
-		$ultimate_ratings_js_url = apply_filters( 'elm_ur_ultimate_ratings_js_url', ELM_UR_PLUGIN_URL . '/assets/js/rating-manager.js' );
-		$ultimate_ratings_css_url = apply_filters( 'elm_ur_ultimate_ratings_css_url', ELM_UR_PLUGIN_URL . '/assets/css/rating-manager.css' );
+		$ratings_js_url = apply_filters( 'elm_rml_ratings_js_url', ELM_RML_PLUGIN_URL . '/assets/js/ratings.js' );
+		$ultimate_ratings_js_url = apply_filters( 'elm_rml_js_url', ELM_RML_PLUGIN_URL . '/assets/js/rating-manager.js' );
+		$ultimate_ratings_css_url = apply_filters( 'elm_rml_css_url', ELM_RML_PLUGIN_URL . '/assets/css/rating-manager.css' );
 		
-        wp_enqueue_script( 'elm-ur-ratings', $ratings_js_url, array(
+        wp_enqueue_script( 'elm-rml-ratings', $ratings_js_url, array(
              'jquery' 
         ) );
 		
-        wp_enqueue_script( 'elm-ur', $ultimate_ratings_js_url, array(
+        wp_enqueue_script( 'elm-rml', $ultimate_ratings_js_url, array(
              'jquery' 
         ) );
 		
@@ -817,11 +817,11 @@ class Elm_Rating_Manager {
 			'email_required' => __( 'Email is a required field', 'elm' ),
 			'wrong_email' => __( 'Wrong email', 'elm' )
 		);
-		wp_localize_script( 'elm-ur', 'feedback_texts', $translation_array );
+		wp_localize_script( 'elm-rml', 'feedback_texts', $translation_array );
         
-        wp_enqueue_style( 'elm-ur', $ultimate_ratings_css_url, array() );
+        wp_enqueue_style( 'elm-rml', $ultimate_ratings_css_url, array() );
 		
-		do_action( 'elm_ur_enqueue_scripts' );
+		do_action( 'elm_rml_enqueue_scripts' );
     }
     
     /**
@@ -848,9 +848,9 @@ class Elm_Rating_Manager {
      * Include classes
      */
     function includes() {
-        require( ELM_UR_PLUGIN_CLASSES_PATH . '/settings.class.php' );
-        require( ELM_UR_PLUGIN_CLASSES_PATH . '/settings-gui.class.php' );
-        require( ELM_UR_PLUGIN_CLASSES_PATH . '/stats.class.php' );
+        require( ELM_RML_PLUGIN_CLASSES_PATH . '/settings.class.php' );
+        require( ELM_RML_PLUGIN_CLASSES_PATH . '/settings-gui.class.php' );
+        require( ELM_RML_PLUGIN_CLASSES_PATH . '/stats.class.php' );
     }
     
     /**
@@ -867,8 +867,8 @@ class Elm_Rating_Manager {
         if ( !empty( $email ) ) {
             $post_title = get_the_title( $post_id );
             
-            $subject = apply_filters( 'elm_ur_feedback_notification_subject', get_bloginfo( 'name' ) . ': ' . __( 'New feedback notification', 'elm' ), $name, $email, $post_id );
-            $message = apply_filters( 'elm_ur_feedback_notification_message', "
+            $subject = apply_filters( 'elm_rml_feedback_notification_subject', get_bloginfo( 'name' ) . ': ' . __( 'New feedback notification', 'elm' ), $name, $email, $post_id );
+            $message = apply_filters( 'elm_rml_feedback_notification_message', "
             " . __('Hello', 'elm') . ", <br /><br />
             " . __('one of', 'elm') . " " . sprintf( '<a href="%s">%s</a>', site_url(), get_bloginfo( 'name' ) ) . " " . __('visitors has rated post', 'elm') . " " . sprintf( '<a href="%s">%s</a>', get_permalink( $post_id ), $post_title ) . " " . __('and left feedback about it.') . "<br />
 			<br />
@@ -913,7 +913,7 @@ class Elm_Rating_Manager {
      * @param string $string
      */
     function debug_log( $string ) {
-        $filename    = ELM_UR_PLUGIN_PATH . '/debug_log.txt';
+        $filename    = ELM_RML_PLUGIN_PATH . '/debug_log.txt';
         $somecontent = $string . "\r\n";
         
         if ( is_writable( $filename ) ) {
@@ -947,7 +947,7 @@ class Elm_Rating_Manager {
             }
         }
         
-        return apply_filters( 'elm_ur_get_custom_post_types', $types );
+        return apply_filters( 'elm_rml_get_custom_post_types', $types );
     }
 	
 	/*
@@ -980,14 +980,14 @@ class Elm_Rating_Manager {
     function install() {
         global $wpdb;
 		
-		if ( get_option( 'elm_ultimate_ratings_lite' ) != 'installed' ) {
-			update_option( 'elm_ultimate_ratings_lite', 'installed' );
+		if ( get_option( 'elm_rating_manager_ite' ) != 'installed' ) {
+			update_option( 'elm_rating_manager_ite', 'installed' );
 			
 			// Add default settings
-			$settings = new Elm_UR_Settings;
+			$settings = new ELM_RML_Settings;
 			$settings->verify_settings();
 			
-			$stats = new Elm_UR_Stats;
+			$stats = new ELM_RML_Stats;
 			$stats->add_cookie_value_prefix();
 
 			$wpdb->hide_errors();

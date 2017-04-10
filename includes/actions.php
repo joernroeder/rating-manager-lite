@@ -6,7 +6,7 @@
   * @param array $pieces
   * @param array $query SQL query 
 */
-function wpse_exclude_posts_clauses( $pieces, $query ) {
+function elm_rml_exclude_posts_clauses( $pieces, $query ) {
 	global $wpdb;
         
 	if ( isset( $_GET['ur_sort'] ) && $_GET['ur_sort'] == 'asc' || isset( $_GET['ur_sort'] ) && $_GET['ur_sort'] == 'desc' ) {
@@ -28,5 +28,5 @@ function wpse_exclude_posts_clauses( $pieces, $query ) {
 }
 
 if ( isset( $_GET['ur_sort'] ) ) {
-	add_filter( 'posts_clauses', 'wpse_exclude_posts_clauses', 10, 2 );
+	add_filter( 'posts_clauses', 'elm_rml_exclude_posts_clauses', 10, 2 );
 }

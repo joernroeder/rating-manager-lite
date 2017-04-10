@@ -6,7 +6,7 @@
  /*
  * Get icon list
  */
-function elm_ur_icon_list() {
+function elm_rml_icon_list() {
 	$array = array(
 		'star-1' => __('Star 1 ', 'elm'),
 		'star-2' => __('Star 2 ', 'elm'),
@@ -21,7 +21,7 @@ function elm_ur_icon_list() {
 /*
  * Get font family list
  */
-function elm_ur_font_family_list() {
+function elm_rml_font_family_list() {
 	$array = array(
 		'Georgia' => 'Georgia',
 		'Palatino Linotype' => 'Palatino Linotype',
@@ -44,7 +44,7 @@ function elm_ur_font_family_list() {
 /*
  * Get font style list
  */
-function elm_ur_font_style_list() {
+function elm_rml_font_style_list() {
 	$array = array(
 		'normal' => 'Normal',
 		'italic' => 'Italic'
@@ -56,7 +56,7 @@ function elm_ur_font_style_list() {
 /*
  * Get font size list
  */
-function elm_ur_font_size_list() {
+function elm_rml_font_size_list() {
 	
 	for( $i = 1; $i <= 35; $i++ ) {
 		$px = $i . 'px';
@@ -70,7 +70,7 @@ function elm_ur_font_size_list() {
 /*
  * Get image size list
  */
-function elm_ur_image_size() {
+function elm_rml_image_size() {
 	for( $i = 10; $i <= 100; $i++ ) {
 		$px = $i . 'px';
 		

@@ -95,7 +95,7 @@
      */
     function UR_Constructor($node, options) {
 
-		var elm_ur_svg_source = options.svg_source;
+		var elm_rml_svg_source = options.svg_source;
 
         this.$node = $node;
 
@@ -214,8 +214,8 @@
 
             for (var i = 0; i < options.numIcons; i++) {
 
-                $normalGroup.append($(elm_ur_svg_source));
-                $ratedGroup.append($(elm_ur_svg_source));
+                $normalGroup.append($(elm_rml_svg_source));
+                $ratedGroup.append($(elm_rml_svg_source));
             }
 
             setStarWidth(options.svgWidth);

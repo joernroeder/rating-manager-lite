@@ -1,8 +1,8 @@
 <?php
 
-if ( ! class_exists( 'Elm_UR_Settings' ) ) :
+if ( ! class_exists( 'ELM_RML_Settings' ) ) :
 
-class Elm_UR_Settings {
+class ELM_RML_Settings {
     
     public $message;
     
@@ -19,7 +19,7 @@ class Elm_UR_Settings {
         /*
          * Process general settings form
          */
-        if ( isset( $_POST['elm_save_ur_settings_general'] ) && check_admin_referer( 'elm_ur_settings_general_action', 'elm_ur_settings_general_nonce' ) ) {
+        if ( isset( $_POST['elm_save_ur_settings_general'] ) && check_admin_referer( 'elm_rml_settings_general_action', 'elm_rml_settings_general_nonce' ) ) {
             if ( isset( $_POST['allow_ratings_on'] ) && is_array( $_POST['allow_ratings_on'] ) ) :
 				$this->delete_settings( 'general', 'allow_ratings_on' );
 				
@@ -92,7 +92,7 @@ class Elm_UR_Settings {
         /*
          * Process style settings form
          */
-        if ( isset( $_POST['elm_save_ur_settings_style'] ) && check_admin_referer( 'elm_ur_settings_style_page_action', 'elm_ur_settings_style_page_nonce' ) ) {
+        if ( isset( $_POST['elm_save_ur_settings_style'] ) && check_admin_referer( 'elm_rml_settings_style_page_action', 'elm_rml_settings_style_page_nonce' ) ) {
             $this->settings['style']['rating_image'] = sanitize_text_field( $_POST['rating_image'] );
             
             $this->settings['style']['rating_image_size'] = sanitize_text_field( $_POST['rating_image_size'] );
@@ -120,7 +120,7 @@ class Elm_UR_Settings {
         /*
          * Process texts settings form
          */
-        if ( isset( $_POST['elm_save_ur_settings_texts'] ) && check_admin_referer( 'elm_ur_settings_texts_page_action', 'elm_ur_settings_texts_page_nonce' ) ) {
+        if ( isset( $_POST['elm_save_ur_settings_texts'] ) && check_admin_referer( 'elm_rml_settings_texts_page_action', 'elm_rml_settings_texts_page_nonce' ) ) {
             
             $this->settings['general_texts']['thankyou_for_voting']      = sanitize_text_field( $_POST['general_texts']['thankyou_for_voting'] );
             $this->settings['general_texts']['feedback_about_this_page'] = sanitize_text_field( $_POST['general_texts']['feedback_about_this_page'] );
@@ -146,9 +146,9 @@ class Elm_UR_Settings {
      */
     function get_settings( $saved = true ) {
         if ( $saved == true )
-            $this->settings = get_option( 'elm_ur_settings' );
+            $this->settings = get_option( 'elm_rml_settings' );
         
-        return apply_filters( 'elm_ur_get_settings', $this->settings );
+        return apply_filters( 'elm_rml_get_settings', $this->settings );
     }
     
     /**
@@ -180,7 +180,7 @@ class Elm_UR_Settings {
      * Save settings
      */
     function save_settings() {
-        update_option( 'elm_ur_settings', $this->settings );
+        update_option( 'elm_rml_settings', $this->settings );
     }
     
     /*
@@ -200,7 +200,7 @@ class Elm_UR_Settings {
      * Delete main settings
      */
     function delete_main_settings() {
-        delete_option( 'elm_ur_settings' );
+        delete_option( 'elm_rml_settings' );
     }
     
     /*

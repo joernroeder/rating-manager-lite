@@ -7,14 +7,14 @@
 if ( !defined('ABSPATH') )
 	exit;
  
-global $elm_ur_ratings;
-$settings = $elm_ur_ratings->get_settings->get_settings();
+global $elm_rml_ratings;
+$settings = $elm_rml_ratings->get_settings->get_settings();
 ?>
 
 <div class="wrap rating-manager">
-	<?php $elm_ur_ratings->get_settings_gui->messages_html(); ?>
+	<?php $elm_rml_ratings->get_settings_gui->messages_html(); ?>
 		
-	<?php $elm_ur_ratings->get_settings_gui->tabs_html(); ?>
+	<?php $elm_rml_ratings->get_settings_gui->tabs_html(); ?>
 
     <h3><?php _e('General Settings', 'elm'); ?></h3>
 
@@ -27,7 +27,7 @@ $settings = $elm_ur_ratings->get_settings->get_settings();
                 <td>
 				<fieldset><legend class="screen-reader-text"><span><?php _e('Enable ratings on', 'elm'); ?></span></legend>
 				<?php
-				$options = $elm_ur_ratings->get_custom_post_types();
+				$options = $elm_rml_ratings->get_custom_post_types();
 				
 				foreach ( $options as $key => $value ) :
 					echo '<label for="allow_ratings_on['. $key .']"><input type="checkbox" name="allow_ratings_on['. $key .']" id="allow_ratings_on['. $key .']" value="'. $key .'" '. checked( @$settings['general']['allow_ratings_on'][$key], 1, false ) .' />
@@ -208,7 +208,7 @@ $settings = $elm_ur_ratings->get_settings->get_settings();
 			
         </table>
 
-		<?php wp_nonce_field( 'elm_ur_settings_general_action', 'elm_ur_settings_general_nonce' ); ?>
+		<?php wp_nonce_field( 'elm_rml_settings_general_action', 'elm_rml_settings_general_nonce' ); ?>
 		
         <p class="submit">
             <input type="submit" name="elm_save_ur_settings_general" id="submit" class="button button-primary" value="<?php _e('Save settings', 'elm'); ?>" />

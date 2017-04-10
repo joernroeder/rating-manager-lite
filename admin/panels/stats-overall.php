@@ -7,7 +7,7 @@
 if ( !defined('ABSPATH') )
 	exit;
 
-global $elm_ur_ratings;
+global $elm_rml_ratings;
 ?>
 <div class="wrap">
     <div id="icon-options-general" class="icon32">
@@ -16,7 +16,7 @@ global $elm_ur_ratings;
 	
 	<h2><?php _e( 'Rating Manager', 'elm' ); ?></h2>
 	
-	<?php $elm_ur_ratings->get_settings_gui->stats_tabs_html(); ?>
+	<?php $elm_rml_ratings->get_settings_gui->stats_tabs_html(); ?>
 	
 	<p><?php _e( 'Total number of ratings per day, week and month.', 'elm') ; ?></p>
 	
@@ -69,13 +69,13 @@ global $elm_ur_ratings;
 				
 		<tbody>
 			<?php 
-				$post_types = $elm_ur_ratings->get_custom_post_types();
+				$post_types = $elm_rml_ratings->get_custom_post_types();
 			
 				$k = -1;
 				foreach( $post_types as $post_type => $label ) :
 					$k += 1;
 				
-					$stats = $elm_ur_ratings->stats->get_rated_posts_numb_date( $post_type );
+					$stats = $elm_rml_ratings->stats->get_rated_posts_numb_date( $post_type );
 					$class = '';
 				
 					if ( $k % 2 == 0 ) {

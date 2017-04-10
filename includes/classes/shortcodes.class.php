@@ -4,14 +4,14 @@
 if ( !defined('ABSPATH') )
 	exit;
 	
-if ( ! class_exists( 'Elm_UR_Shortcodes' ) ) :
+if ( ! class_exists( 'ELM_RML_Shortcodes' ) ) :
 
-class Elm_UR_Shortcodes {
+class ELM_RML_Shortcodes {
     
     function __construct() {
-		add_shortcode( 'elm_rating', array( $this, 'elm_rating' ) );
-		add_shortcode( 'elm_rating_readonly', array( $this, 'elm_readonly_rating_form' ) );
-		add_shortcode( 'elm_top_rated', array( $this, 'elm_top_rated' ) );
+		add_shortcode( 'elm_rml_rating', array( $this, 'elm_rml_rating' ) );
+		add_shortcode( 'elm_rml_rating_readonly', array( $this, 'elm_rml_readonly_rating_form' ) );
+		add_shortcode( 'elm_rml_top_rated', array( $this, 'elm_rml_top_rated' ) );
     }
 	
     /**
@@ -19,7 +19,7 @@ class Elm_UR_Shortcodes {
 	 *
      * @param array $atts
      */
-    function elm_top_rated( $atts ) {
+    function elm_rml_top_rated( $atts ) {
         $atts = shortcode_atts( array(
              'post_type' => '',
             'sort' => 'asc',
@@ -77,7 +77,7 @@ class Elm_UR_Shortcodes {
             $html .= '</ul>';
         }
         
-        return apply_filters( 'elm_ur_top_rated_html_shortcode', $html );
+        return apply_filters( 'elm_rml_top_rated_html_shortcode', $html );
     }
 	
 	/**
@@ -85,10 +85,10 @@ class Elm_UR_Shortcodes {
 	 *
      * @param array $atts
      */
-	function elm_rating( $atts ) {
-		global $elm_ur_ratings;
+	function elm_rml_rating( $atts ) {
+		global $elm_rml_ratings;
 		
-		return $elm_ur_ratings->get_rating_form_html();
+		return $elm_rml_ratings->get_rating_form_html();
 	}
 	
 	/*
@@ -96,12 +96,12 @@ class Elm_UR_Shortcodes {
 	*
 	* @param array $atts
 	*/
-	function elm_readonly_rating_form( $atts ) {
+	function elm_rml_readonly_rating_form( $atts ) {
 		$atts = shortcode_atts( array(
 			'average' => '0'
         ), $atts );
 		
-		return elm_readonly_rating_form( intval( $atts['average'] ), false );
+		return elm_rml_readonly_rating_form( intval( $atts['average'] ), false );
 	}
 }
 
