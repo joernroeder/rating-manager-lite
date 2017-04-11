@@ -35,11 +35,12 @@ For FAQ and more information, please go to [Rating Manager Lite Documentation](h
 
 1. Rating form
 2. Media rating
-3. General settings
-4. Styling settings
-5. Messages settings
-6. Statistics settings
-7. Overall statistics
+3. bbPress topics/replies rating
+4. General settings
+5. Styling settings
+6. Messages settings
+7. Statistics settings
+8. Overall statistics
 
 == Changelog ==
 
