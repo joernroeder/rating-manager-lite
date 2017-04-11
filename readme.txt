@@ -23,6 +23,55 @@ We also have a public [GIT repository](https://github.com/elementous/rating-mana
 = PRO version =
 The PRO version of the plugin includes more than 100 rating icons, custom rating icon (SVG) upload, comments rating and premium support. [Get Rating Manager PRO](https://www.elementous.com/product/premium-wordpress-plugins/rating-manager/)
 
+**Shortcodes**
+`
+[elm_rml_rating] - No parameters
+[elm_rml_rating_readonly] - Required parameter: average (up to 5) e.g. [elm_rml_rating_readonly average="4"] 
+[elm_rml_top_rated] - Optional parameters: post_type, sort, limit
+`
+
+**Widgets**
+`
+Rating
+Top Rated Posts
+Sort by dropdown (highest/lowest rating)
+`
+
+**Filters**
+`
+elm_rml_html_template - front-end template
+elm_rml_feedback_form_html - front-end feedback form template
+elm_rml_readonly_rating_form - front-end read-only rating form template
+elm_rml_rating_js - front-end JavaScript code
+elm_rml_average_calculate_func - average calculation
+elm_rml_rated_users_number - rated users number
+elm_rml_leave_your_feedback - leave your feedback text
+elm_rml_ratings_js_url - ratings JavaScript file url
+elm_rml_js_url - rating manager JavaScript file url
+elm_rml_css_url - rating manager CSS file url
+elm_rml_feedback_notification_subject - Feedback notification email subject text
+elm_rml_feedback_notification_message - Feedback notification email message text
+elm_rml_get_custom_post_types - Available custom post types 
+elm_rml_get_settings - Rating Manager settings
+elm_rml_top_rated_html_shortcode - front-end top rated posts shortcode template
+elm_rml_ratings_sortby_dropdow - front-end sortby dropdown
+elm_rml_top_rated_posts_widget - front-end top rated posts widget template
+`
+
+**Actions**
+`
+elm_rml_init - Plugin init
+elm_rml_feedback_ajax_callback - Feedback AJAX callback
+elm_rml_add_rating_ajax_callback - Rating AJAX callback
+elm_rml_add_rating - After adding rating
+elm_rml_update_average_rating - After updating average rating
+elm_rml_add_feedback - After adding feedback
+elm_rml_rating_js - After Rating Manager JavaScript code
+elm_rml_below_html_template - Below rating template
+elm_rml_after_html_template - After rating template
+elm_rml_enqueue_scripts - After Enqueing scripts
+`
+
 == Installation ==
 1. Upload `rating-manager-lite` to the `/wp-content/plugins/` directory
 3. Activate the plugin through the 'Plugins' menu in WordPress
