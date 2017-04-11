@@ -1,4 +1,4 @@
-=== Rating Manager ===
+=== Rating Manager Lite ===
 Contributors: Elementous, dominykasgel, darius_fx
 Donate link: https://www.elementous.com
 Tags: rating, star rating, ratings, star, vote, voting, comment rating, bbpress rating, images rating
