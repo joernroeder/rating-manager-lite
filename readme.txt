@@ -12,7 +12,7 @@ This plugin allows you to rate content by adding custom rating forms. Almost unl
 
 == Description ==
 
-Rating Manager Lite plugin is a first ever content plugin for WordPress that utilizes SVG image technology. Utilization of SVG technology gave a possibility for us to create very light, fast and highly customizable rating plugin. Rating Manager Lite is SEO friendly, it can generate Rich Snippets, so, your website can provide more data to the search engines and advance in search results ranking. To make this plugin more efficient tool, we have integrated statistics engine, so, you can get a clear image of what’s happening on with your website content and comment rating. Moreover, to make this plugin more useful and attractive to WordPress developers, we have enriched it with hooks, filters and functions that could help developers to use this plugin more effective.
+Rating Manager Lite plugin is a first ever content plugin for WordPress that utilizes SVG image technology. Utilization of SVG technology gave a possibility for us to create very light, fast and highly customizable rating plugin. Rating Manager Lite is SEO friendly, and it can generate Rich Snippets, so, your website can provide more data to the search engines and advance in search results ranking. To make this plugin more efficient tool, we have integrated statistics engine, so, you can get a clear image of what’s happening on with your website content and comment rating. Moreover, to make this plugin more useful and attractive to WordPress developers, we have enriched it with hooks, filters, and functions that could help developers to use this plugin more efficient.
 
 Rating Manager Lite is compatible with WooCommerce, bbPress, BuddyPress. The plugin is multi-site ready.
 
