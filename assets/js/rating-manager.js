@@ -106,7 +106,7 @@ function elm_rml_process(svg_source, options, nonce) {
 			jQuery(elm_this).parent().parent().find('.elm-rating-stats').html(response.avg);
 			
 			if ( response.thankyou_msg ) {
-				jQuery(elm_this).parent().parent().find('.elm-thankyou-msg').html(response.thankyou_msg).fadeOut(3000);
+				jQuery(elm_this).parent().parent().find('.elm-thankyou-msg').html(response.thankyou_msg).show().fadeOut(3000);
 			}
 		}, 'json');
 
