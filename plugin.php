@@ -5,10 +5,10 @@
   Description: Get more feedback from your website visitors by adding rating forms for content. This is the first ever WordPress rating plugin that uses SVG images as rating form icons. Almost unlimited capabilities for customisation.
   Author: Elementous
   Author URI: https://www.elementous.com
-  Version: 1.0
+  Version: 1.1.0
 */
 
-define( 'ELM_RML_VERSION', '1.0' );
+define( 'ELM_RML_VERSION', '1.1.0' );
 define( 'ELM_RML_PLUGIN_BASENAME', plugin_basename(__FILE__) );
 define( 'ELM_RML_PLUGIN_PATH', dirname( __FILE__ ) );
 define( 'ELM_RML_PLUGIN_ADMIN_PATH', ELM_RML_PLUGIN_PATH . '/admin' );
