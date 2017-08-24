@@ -157,7 +157,7 @@
 
             containerWidth = containerWidth * options.numIcons;
 
-            $node.width(containerWidth);
+            $node.css({'min-width': containerWidth + 'px' });
 
             $normalGroup.find("svg")
                 .attr({
