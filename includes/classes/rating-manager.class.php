@@ -611,7 +611,7 @@ class Elm_Rating_Manager {
 
 		$average = apply_filters( 'elm_rml_average_calculate_func', ( $total / $count ), $max_ratings, $array, $count, $total );
 
-        return round( $average );
+        return $average;
     }
 
 	/**
@@ -627,7 +627,7 @@ class Elm_Rating_Manager {
 
 		$result = $wpdb->get_var( "SELECT COUNT(id) FROM {$wpdb->prefix}elm_ratings WHERE post_id = {$post_id} AND type = '{$post_type}'" );
 
-		return apply_filters( 'elm_rml_rated_users_number', $result, $post_id, $post_type );
+		return (int) apply_filters( 'elm_rml_rated_users_number', $result, $post_id, $post_type );
 	}
 
     /*
@@ -665,7 +665,8 @@ class Elm_Rating_Manager {
      * @param int $post post ID
      */
     function template( $post_id ) {
-        $avg       = (int) $this->calculate_average( $post_id );
+        $avg       = $this->calculate_average( $post_id );
+        $rated_by_users_num = $this->get_rated_by_users_num( $post_id );
 
         $feedback_form = (int) $this->get_settings->get_setting( 'general', 'feedback', 'enable_feedback' );
 		$use_schema = (int) $this->get_settings->get_setting( 'general', 'rich_snippets' );
@@ -679,7 +680,6 @@ class Elm_Rating_Manager {
 		$_template = str_replace( '%THANK_YOU_MESSAGE%', '<div class="elm-thankyou-msg"></div>', $_template );
 
 		if ( strpos( $_template, '%RATED_BY_USERS_NUM%' ) !== false ) {
-			$rated_by_users_num = $this->get_rated_by_users_num( $post_id );
 			$_template = str_replace( '%RATED_BY_USERS_NUM%', $rated_by_users_num, $_template );
 		}
 
@@ -704,15 +704,19 @@ class Elm_Rating_Manager {
         }
 
 		// Rich snippets
-		if ( $use_schema == 1 && $avg != 0 && $max_ratings == 5 )
-			$_template = '<div itemscope itemtype="http://schema.org/Review">
-			<div itemprop="author" itemscope itemtype="http://schema.org/Person">
-			<meta itemprop="name" content="'. __('visitors', 'elm') .'"></div>
-			<div itemprop="itemReviewed" itemscope itemtype="http://schema.org/Thing">
-			<meta itemprop="name" content="'. get_the_title( $post_id ) .'"></div>
-			<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-			<meta itemprop="ratingValue" content="'. $avg .'"></div>
-			</div>' . $_template;
+		if ( $use_schema == 1 && $avg != 0 && $max_ratings == 5 ) {
+            $schema_template = '<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                <meta itemprop="name" content="' . get_the_title($post_id) . '">
+                <meta itemprop="worstRating" content="1"/>
+                <meta itemprop="ratingValue" content="' . number_format((float) $avg, 2, '.', '') . '">
+                <meta itemprop="ratingCount" content="' . $rated_by_users_num . '">
+                <div itemprop="itemReviewed" itemscope itemtype="http://schema.org/CreativeWork"></div>
+            </div>';
+
+            do_action('elm_rml_get_schma_template', $schema_template, $post_id, $avg, $rated_by_users_num, $max_ratings);
+
+            $_template = $schema_template . $_template;
+        }
 
 		// If feedback is enabled, then add feedback form
         if ( $feedback_form )
