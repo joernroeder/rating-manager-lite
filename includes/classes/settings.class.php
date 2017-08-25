@@ -101,9 +101,9 @@ class ELM_RML_Settings {
                 $_POST['max_ratings'] = 1;
             
             $this->settings['style']['max_ratings'] = intval( $_POST['max_ratings'] );
-			
-			if ( $_POST['max_ratings'] )
-            
+
+			//if ( $_POST['max_ratings'] )
+
             $this->settings['style']['color']['normal_fill'] = sanitize_text_field( $_POST['normal_fill'] );
             $this->settings['style']['color']['rated_fill']  = sanitize_text_field( $_POST['rated_fill'] );
             
