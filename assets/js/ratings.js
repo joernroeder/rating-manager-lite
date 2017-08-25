@@ -5,7 +5,7 @@
  * rateYo
  * http://prrashi.github.io/rateyo/
  * Copyright (c) 2014 Prashanth Pamidi; Licensed MIT
- * 
+ *
  */
 (function($) {
     "use strict";
@@ -24,7 +24,7 @@
         onSet: null
     };
 
-    function checkPercision(value, minValue, maxValue) {
+    function checkPrecision(value, minValue, maxValue) {
 
         /* its like comparing 0.00 with 0 which is true*/
         if (value === minValue) {
@@ -128,10 +128,13 @@
             .appendTo($groupWrapper);
 
         function showRating(ratingVal) {
+            if (ratingVal && typeof ratingVal !== 'number') {
+                ratingVal = parseFloat(ratingVal);
+            }
 
             if (!isDefined(ratingVal)) {
-
                 ratingVal = options.rating;
+                ratingVal = checkPrecision(parseFloat(ratingVal).toFixed(options.precision), minValue, maxValue);
             }
 
             var minValue = options.minValue,
@@ -140,6 +143,8 @@
             var percent = ((ratingVal - minValue) / (maxValue - minValue)) * 100;
 
             $ratedGroup.css("width", percent + "%");
+
+            return { rating: ratingVal, percent: percent };
         }
 
         function setStarWidth(newWidth) {
@@ -269,22 +274,23 @@
 
             var position = $normalGroup.offset(),
                 nodeStartX = position.left,
-                nodeEndX = nodeStartX + $normalGroup.width();
+                nodeEndX = nodeStartX + $normalGroup.width(),
+                nodeWidth = nodeEndX - nodeStartX;
 
             var minValue = options.minValue,
                 maxValue = options.maxValue;
 
             var pageX = e.pageX;
 
-            var calculatedRating;
+            var calculatedRating = 0;
 
             if (pageX < nodeStartX) {
-
                 calculatedRating = minValue;
-            } else if (pageX > nodeEndX) {
-
+            }
+            else if (pageX > nodeEndX) {
                 calculatedRating = maxValue;
-            } else {
+            }
+            else {
 
                 calculatedRating = ((pageX - nodeStartX) / (nodeEndX - nodeStartX));
                 calculatedRating *= (maxValue - minValue);
@@ -293,17 +299,16 @@
 
             var no_precision = 0.5;
 
-            return calculatedRating + no_precision;
+            return (calculatedRating + no_precision).toFixed(0);
         }
 
         function onMouseEnter(e) {
-
-            var rating = calculateRating(e).toFixed(options.precision);
+            rating = calculateRating(e);
 
             var minValue = options.minValue,
                 maxValue = options.maxValue;
 
-            rating = checkPercision(parseFloat(rating), minValue, maxValue);
+            $node.addClass('hover');
 
             showRating(rating);
 
@@ -313,9 +318,8 @@
         }
 
         function onMouseLeave() {
-
-            showRating(rating);
-
+            $node.removeClass('hover');
+            showRating();
             $node.trigger("ultimateratings.change", {
                 rating: options.rating
             });
@@ -385,7 +389,6 @@
         }
 
         function setRating(newValue) {
-
             if (!isDefined(newValue)) {
 
                 return options.rating;
@@ -410,9 +413,10 @@
 
             checkBounds(rating, minValue, maxValue);
 
-            rating = parseFloat(rating.toFixed(options.precision));
+            //rating = parseFloat(rating.toFixed(options.precision));
 
-            checkPercision(parseFloat(rating), minValue, maxValue);
+            //checkPrecision(parseFloat(rating), minValue, maxValue);
+            rating = checkPrecision(parseFloat(rating).toFixed(options.precision), minValue, maxValue);
 
             options.rating = rating;
 
@@ -444,7 +448,6 @@
         }
 
         this.rating = function(newValue) {
-
             if (!isDefined(newValue)) {
 
                 return options.rating;
