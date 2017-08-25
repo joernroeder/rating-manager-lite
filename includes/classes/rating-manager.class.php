@@ -642,6 +642,7 @@ class Elm_Rating_Manager {
 		if ( ! file_exists( ELM_RML_PLUGIN_SVG_PATH . '/' . $svg_icon_name . '.svg' ) )
 			return;
 
+        $precision = $this->get_settings->get_setting( 'style', 'precision' );
         $max_ratings = $this->get_settings->get_setting( 'style', 'max_ratings' );
         $image_size  = $this->get_settings->get_setting( 'style', 'rating_image_size' );
         $normal_fill = $this->get_settings->get_setting( 'style', 'color', 'normal_fill' );
@@ -650,7 +651,7 @@ class Elm_Rating_Manager {
 		$ratings_nonce = wp_create_nonce( 'elm_rml_process_rating_action' );
 
         $output = "<script type=\"text/javascript\">
-			var options = { numIcons: " . $max_ratings . ", maxValue: " . $max_ratings . ", normalFill: '" . $normal_fill . "', ratedFill: '" . $rated_fill . "', svgWidth: '" . $image_size . "' }; var ur_nonce = '". $ratings_nonce ."';
+			var options = { precision: " . $precision . ", numIcons: " . $max_ratings . ", maxValue: " . $max_ratings . ", normalFill: '" . $normal_fill . "', ratedFill: '" . $rated_fill . "', svgWidth: '" . $image_size . "' }; var ur_nonce = '". $ratings_nonce ."';
 			elm_ultimate_ratings( '" . $svg_icon . "', options, ur_nonce );
         </script>";
 
